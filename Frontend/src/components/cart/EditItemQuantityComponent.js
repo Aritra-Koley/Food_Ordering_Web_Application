@@ -1,0 +1,55 @@
+import React, {useState, useEffect} from 'react';
+import MealService from '../../services/MealService';
+import {Form} from 'react-bootstrap'
+
+
+const EditItemQuantityComponent = (props) => {
+   const itemFromCart = props.itemFromCart;
+   const itemQuantity = props.itemQuantity
+   const setItemQuantity = props.setItemQuantity;
+
+  return (
+    <div className='main-quantity-container'>
+    <div className='meal-info-container'>
+      <div className='meal-container'>
+          <label className='label-meal-info'>Meal:</label>
+          <label className='label-meal-value'>{itemFromCart?.mealName}</label>
+      </div>
+
+      <div className='meal-container'>
+          <label className='label-meal-info'>Price:</label>
+          <label className='label-meal-value'>{itemFromCart?.mealPrice}.00 Rupees</label>
+      </div>              
+    </div>
+        
+        <div className="quantity-container">
+          <button
+            className='btn-decrease'
+            type="button"
+            onClick={() => {
+              
+              const newValue = Math.max(1, itemQuantity - 1);
+              setItemQuantity(newValue);
+            }}
+          >
+            <svg className='icon-minus' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
+          
+          </button>
+          <label className='value-label'>{itemQuantity}</label>
+          <button
+            className='btn-increase'
+            type="button"
+            onClick={() => {
+              // Increase the value by 1
+              const newValue = itemQuantity + 1;
+              setItemQuantity(newValue);
+            }}
+          >
+           <svg className='icon-plus' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg> 
+          </button>
+        </div>
+    </div>    
+  )
+}
+
+export default EditItemQuantityComponent
